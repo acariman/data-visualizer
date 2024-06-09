@@ -23,7 +23,7 @@ cmd_handler.setLevel(logging.DEBUG)
 
 # Formats
 fmt = logging.Formatter(
-    fmt="%(asctime)s %(levelname)s\t%(message)s",
+    fmt="%(asctime)s %(levelname)s\t%(module)s\t%(message)s",
     datefmt="%Y-%m-%dT%H:%M:%S",
 )
 file_handler.setFormatter(fmt)
