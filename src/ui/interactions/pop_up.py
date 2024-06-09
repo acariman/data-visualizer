@@ -23,7 +23,6 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
         super().__init__()
         self.setup_ui(self)
 
-        self.separator = self.sep_line.text()
         self.file = file
         self.layer_text.setText(str(file.stem))
 
@@ -37,7 +36,12 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
         with open(self.file, "r") as file:
             line = file.readline().strip()
 
-        cols = line.split(self.separator)
+        sep = self.sep_line.text()
+
+        if sep == "":
+            return
+
+        cols = line.split(sep)
 
         suggestions = {}
         for col in cols:

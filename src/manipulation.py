@@ -24,7 +24,7 @@ class Manipulator:
             logging.warning(f"Layer already added ({layer})")
             return
 
-        data = pd.read_csv(file)
+        data = pd.read_csv(file, sep=params["separator"])
 
         if all(
             [
