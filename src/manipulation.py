@@ -17,7 +17,7 @@ class Manipulator:
 
         self.layers = {}
         self.canvas = vedo.Plotter(qt_widget=widget)
-        self.render = render
+        self.should_render = render
 
     def add(self, file):
         file = Path(file)
@@ -28,23 +28,37 @@ class Manipulator:
             logging.error(f"File does not exists ({file})")
             return
 
+        layer = file.stem
+
         if file.suffix == ".csv":
             logging.debug(f"CSV file detected")
 
             data = pd.read_csv(file)
-            self.layers[file.stem] = {
+            self.layers[layer] = {
                 "actor": vedo.Points(data[["x", "y", "z"]]),
                 "raw": data,
+                "state": True,
+                "nice-name": file.name,
+                "name": layer,
             }
         else:
             logging.error(f"No valid layer ({file})")
             return
 
-        self.canvas += self.layers[file.stem]["actor"]
+        return self.layers[layer]
 
-        if self.render:
-            self.show()
+    def show(self, layer):
+        self.canvas.add(self.layers[layer]["actor"])
 
-    def show(self):
+        if self.should_render:
+            self.render()
+
+    def hide(self, layer):
+        self.canvas.remove(self.layers[layer]["actor"])
+
+        if self.should_render:
+            self.render()
+
+    def render(self):
         logging.info("Rendering new state")
         self.canvas.show()
