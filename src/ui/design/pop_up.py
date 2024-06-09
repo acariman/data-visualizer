@@ -95,7 +95,7 @@ class CSVPopUpDesign(object):
 
     def retranslateUi(self, pop_up):
         _translate = QtCore.QCoreApplication.translate
-        pop_up.setWindowTitle(_translate("pop_up", "Dialog"))
+        pop_up.setWindowTitle(_translate("pop_up", "CSV layer parameters"))
         self.layer_label.setText(_translate("pop_up", "Layer"))
         self.layer_text.setText(_translate("pop_up", "file-nice-name"))
         self.sep_label.setText(_translate("pop_up", "Separator"))

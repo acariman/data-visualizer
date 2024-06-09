@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>CSV layer parameters</string>
   </property>
   <layout class="QFormLayout" name="layout">
    <item row="0" column="0">
