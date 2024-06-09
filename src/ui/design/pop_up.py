@@ -8,7 +8,7 @@ Generated with Designer from PyQt6-tools
 from PyQt6 import QtCore, QtWidgets
 
 
-class PopUpDesign(object):
+class CSVPopUpDesign(object):
     def __init__(self):
         self.sep_label = None
         self.sep_line = None

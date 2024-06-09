@@ -3,9 +3,6 @@
 # Core
 import logging
 
-# Core
-from pathlib import Path
-
 # 3rd party
 import vedo
 import pandas as pd
@@ -19,30 +16,32 @@ class Manipulator:
         self.canvas = vedo.Plotter(qt_widget=widget)
         self.should_render = render
 
-    def add(self, file):
-        file = Path(file)
-
-        if file.exists():
-            logging.info(f"Adding new layer ({file})")
-        else:
-            logging.error(f"File does not exists ({file})")
-            return
-
+    def add_csv(self, file, params=None):
+        logging.debug(f"Adding CSV file")
         layer = file.stem
 
-        if file.suffix == ".csv":
-            logging.debug(f"CSV file detected")
+        data = pd.read_csv(file)
 
-            data = pd.read_csv(file)
+        if all([
+            params["x"] in data,
+            params["y"] in data,
+            params["z"] in data
+        ]):
+            logging.debug(f"Adding layer based on params ({params})")
             self.layers[layer] = {
-                "actor": vedo.Points(data[["x", "y", "z"]]),
+                "actor": vedo.Points(data[[
+                    params["x"],
+                    params["y"],
+                    params["z"],
+                ]]),
                 "raw": data,
                 "state": True,
                 "nice-name": file.name,
                 "name": layer,
+                "params": params,
             }
         else:
-            logging.error(f"No valid layer ({file})")
+            logging.error(f"Invalid column selected ({params})")
             return
 
         return self.layers[layer]

@@ -2,10 +2,12 @@
 
 # Core
 import logging
+from pathlib import Path
 
 # 1st party
 from src.manipulation import Manipulator
 from src.ui.design.main import MainDesign
+from src.ui.interactions.pop_up import CSVPopUp
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import QDragEnterEvent, QDropEvent
@@ -31,12 +33,40 @@ class MainWindow(QMainWindow, MainDesign):
         logging.debug("Drop event")
 
         for url in event.mimeData().urls():
-            file = url.toLocalFile()
-            self.add_layer(file)
+            file = Path(url.toLocalFile())
 
-    def add_layer(self, file):
+            if file.exists():
+                logging.info(f"Adding new layer ({file})")
+            else:
+                logging.error(f"File does not exists ({file})")
+                return
+
+            if file.suffix == ".csv":
+                self.add_layer_csv(file)
+            else:
+                logging.error(f"No valid layer ({file})")
+
+    def add_layer_csv(self, file):
+        params = None
+        pop_up = CSVPopUp(file)
+        if pop_up.exec() == QDialog.DialogCode.Accepted:
+            params = {
+                "separator": pop_up.sep_line.text(),
+                "descriptor": pop_up.x_cb.currentText(),
+                "x": pop_up.x_cb.currentText(),
+                "y": pop_up.x_cb.currentText(),
+                "z": pop_up.x_cb.currentText(),
+            }
+
+        layer = self.mpl.add_csv(file=file, params=params)
+
+        if not layer:
+            return
+
+        self.add_layer(layer)
+
+    def add_layer(self, layer):
         logging.debug(f"Adding layer")
-        layer = self.mpl.add(file)
 
         item_widget = QWidget()
         item_layout = QHBoxLayout()

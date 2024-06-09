@@ -4,12 +4,12 @@
 import logging
 
 # 1st party
-from src.ui.design.pop_up import PopUpDesign
+from src.ui.design.pop_up import CSVPopUpDesign
 from PyQt6.QtWidgets import *
 
 
-class PopUp(QDialog, PopUpDesign):
-    def __init__(self):
+class CSVPopUp(QDialog, CSVPopUpDesign):
+    def __init__(self, file):
         logging.info("Initializing pop up")
 
         super().__init__()
