@@ -18,7 +18,7 @@ class Manipulator:
 
     def add_csv(self, file, params=None):
         logging.debug(f"Adding CSV file")
-        layer = file.stem
+        layer = file.name
 
         if layer in self.layers:
             logging.warning(f"Layer already added ({layer})")
@@ -47,7 +47,7 @@ class Manipulator:
                 ),
                 "raw": data,
                 "state": True,
-                "nice-name": file.name,
+                "nice-name": file.stem,
                 "name": layer,
                 "params": params,
             }
@@ -72,3 +72,20 @@ class Manipulator:
     def render(self):
         logging.info("Rendering new state")
         self.canvas.show(resetcam=len(self.layers) <= 1)
+
+    def get_info(self, evt):
+        obj = evt.object
+        if not obj:
+            return
+
+        for layer in self.layers.values():
+            if layer["actor"] is obj:
+                picked = evt.picked3d
+                point = obj.closest_point(picked, return_point_id=True)
+
+                data = layer["raw"].iloc[point].to_dict()
+                data["layer"] = layer["nice-name"]
+
+                return data
+
+        return

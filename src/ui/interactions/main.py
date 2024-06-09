@@ -20,6 +20,7 @@ class MainWindow(QMainWindow, MainDesign):
         super().__init__()
         self.setup_ui(self)
         self.mpl = Manipulator(self.canvas)
+        self.mpl.canvas.add_callback("MouseMove", self.get_info)
 
         self.setAcceptDrops(True)
 
@@ -103,3 +104,16 @@ class MainWindow(QMainWindow, MainDesign):
         else:
             logging.debug(f"Hiding layer {layer}")
             self.mpl.hide(layer)
+
+    def get_info(self, evt):
+        info = self.mpl.get_info(evt)
+        if info is None:
+            self.layer_value.setText(" - ")
+            self.x_value.setText(" - ")
+            self.y_value.setText(" - ")
+            self.z_value.setText(" - ")
+        else:
+            self.layer_value.setText(info["layer"])
+            self.x_value.setText(str(round(info["x"], 1)))
+            self.y_value.setText(str(round(info["y"], 1)))
+            self.z_value.setText(str(round(info["z"], 1)))
