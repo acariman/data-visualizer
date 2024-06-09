@@ -20,6 +20,10 @@ class Manipulator:
         logging.debug(f"Adding CSV file")
         layer = file.stem
 
+        if layer in self.layers:
+            logging.warning(f"Layer already added ({layer})")
+            return
+
         data = pd.read_csv(file)
 
         if all(
