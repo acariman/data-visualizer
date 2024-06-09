@@ -39,29 +39,12 @@ class MainDesign(object):
 
     def setup_ui(self, main):
         main.setObjectName("main")
-        main.resize(911, 622)
+        main.resize(1280, 720)
+        main.setMinimumSize(QtCore.QSize(1280, 720))
         self.central = QtWidgets.QWidget(parent=main)
         self.central.setObjectName("central")
         self.central_layout = QtWidgets.QGridLayout(self.central)
         self.central_layout.setObjectName("central_layout")
-        self.tabs = QtWidgets.QTabWidget(parent=self.central)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred
-        )
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tabs.sizePolicy().hasHeightForWidth())
-        self.tabs.setSizePolicy(sizePolicy)
-        self.tabs.setObjectName("tabs")
-        self.layers_tab = QtWidgets.QWidget()
-        self.layers_tab.setObjectName("layers_tab")
-        self.layers_layout = QtWidgets.QGridLayout(self.layers_tab)
-        self.layers_layout.setObjectName("layers_layout")
-        self.layers_list = QtWidgets.QListWidget(parent=self.layers_tab)
-        self.layers_list.setObjectName("layers_list")
-        self.layers_layout.addWidget(self.layers_list, 0, 0, 1, 1)
-        self.tabs.addTab(self.layers_tab, "")
-        self.central_layout.addWidget(self.tabs, 0, 1, 1, 1)
         self.info_group = QtWidgets.QGroupBox(parent=self.central)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum
@@ -167,9 +150,6 @@ class MainDesign(object):
             0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.layer_value
         )
         self.central_layout.addWidget(self.info_group, 3, 1, 1, 1)
-        self.canvas = QVTKRenderWindowInteractor(parent=self.central)
-        self.canvas.setObjectName("canvas")
-        self.central_layout.addWidget(self.canvas, 0, 0, 4, 1)
         spacerItem = QtWidgets.QSpacerItem(
             20,
             15,
@@ -177,6 +157,9 @@ class MainDesign(object):
             QtWidgets.QSizePolicy.Policy.Maximum,
         )
         self.central_layout.addItem(spacerItem, 2, 1, 1, 1)
+        self.canvas = QVTKRenderWindowInteractor(parent=self.central)
+        self.canvas.setObjectName("canvas")
+        self.central_layout.addWidget(self.canvas, 0, 0, 4, 1)
         self.label_tab = QtWidgets.QLabel(parent=self.central)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Maximum
@@ -192,9 +175,38 @@ class MainDesign(object):
         self.label_tab.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_tab.setObjectName("label_tab")
         self.central_layout.addWidget(self.label_tab, 1, 1, 1, 1)
+        self.tabs = QtWidgets.QTabWidget(parent=self.central)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Expanding
+        )
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tabs.sizePolicy().hasHeightForWidth())
+        self.tabs.setSizePolicy(sizePolicy)
+        self.tabs.setMaximumSize(QtCore.QSize(200, 16777215))
+        self.tabs.setObjectName("tabs")
+        self.layers_tab = QtWidgets.QWidget()
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Expanding,
+            QtWidgets.QSizePolicy.Policy.Preferred,
+        )
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.layers_tab.sizePolicy().hasHeightForWidth())
+        self.layers_tab.setSizePolicy(sizePolicy)
+        self.layers_tab.setObjectName("layers_tab")
+        self.layers_layout = QtWidgets.QFormLayout(self.layers_tab)
+        self.layers_layout.setLabelAlignment(
+            QtCore.Qt.AlignmentFlag.AlignRight
+            | QtCore.Qt.AlignmentFlag.AlignTrailing
+            | QtCore.Qt.AlignmentFlag.AlignVCenter
+        )
+        self.layers_layout.setObjectName("layers_layout")
+        self.tabs.addTab(self.layers_tab, "")
+        self.central_layout.addWidget(self.tabs, 0, 1, 1, 1)
         main.setCentralWidget(self.central)
         self.menu_bar = QtWidgets.QMenuBar(parent=main)
-        self.menu_bar.setGeometry(QtCore.QRect(0, 0, 911, 22))
+        self.menu_bar.setGeometry(QtCore.QRect(0, 0, 1280, 22))
         self.menu_bar.setObjectName("menu_bar")
         main.setMenuBar(self.menu_bar)
         self.status_bar = QtWidgets.QStatusBar(parent=main)
@@ -208,9 +220,6 @@ class MainDesign(object):
     def retranslateUi(self, main):
         _translate = QtCore.QCoreApplication.translate
         main.setWindowTitle(_translate("main", "Data visualizer"))
-        self.tabs.setTabText(
-            self.tabs.indexOf(self.layers_tab), _translate("main", "Layers")
-        )
         self.info_group.setTitle(_translate("main", "Information"))
         self.x_label.setText(_translate("main", "x"))
         self.x_value.setText(_translate("main", " - "))
@@ -221,3 +230,6 @@ class MainDesign(object):
         self.layer_label.setText(_translate("main", "Layer"))
         self.layer_value.setText(_translate("main", " - "))
         self.label_tab.setText(_translate("main", "Drag & drop to add a layer"))
+        self.tabs.setTabText(
+            self.tabs.indexOf(self.layers_tab), _translate("main", "Layers")
+        )

@@ -72,25 +72,16 @@ class MainWindow(QMainWindow, MainDesign):
     def add_layer(self, layer):
         logging.debug(f"Adding layer")
 
-        item_widget = QWidget()
-        item_layout = QHBoxLayout()
-        item_layout.setContentsMargins(0, 0, 0, 0)
-
-        layer_name = QLabel(layer["nice-name"])
-        checkbox = QCheckBox()
+        label = QLabel(layer["nice-name"], parent=self.layers_tab)
+        checkbox = QCheckBox(parent=self.layers_tab)
         checkbox.setChecked(layer["state"])
         checkbox.stateChanged.connect(
             lambda state, lyr=layer["name"]: self.toggle_layer(state, lyr)
         )
 
-        # Añadir los widgets al layout
-        item_layout.addWidget(checkbox)
-        item_layout.addWidget(layer_name)
-        item_widget.setLayout(item_layout)
-
-        # Añadir el widget contenedor al QListWidget
-        list_item = QListWidgetItem(self.layers_list)
-        self.layers_list.setItemWidget(list_item, item_widget)
+        cnt = self.layers_layout.count()
+        self.layers_layout.setWidget(cnt, QFormLayout.ItemRole.LabelRole, checkbox)
+        self.layers_layout.setWidget(cnt, QFormLayout.ItemRole.FieldRole, label)
 
         if layer["state"]:
             self.mpl.show(layer["name"])
