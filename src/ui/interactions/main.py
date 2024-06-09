@@ -13,7 +13,7 @@ from PyQt6.QtGui import QDragEnterEvent, QDropEvent
 
 class MainWindow(QMainWindow, MainDesign):
     def __init__(self):
-        logging.info("Initializing UI")
+        logging.info("Initializing main window")
 
         super().__init__()
         self.setup_ui(self)
