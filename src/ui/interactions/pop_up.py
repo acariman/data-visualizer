@@ -17,6 +17,7 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
 
         self.separator = self.sep_line.text()
         self.file = file
+        self.setWindowTitle(f"Layer: {file.stem}")
 
         self.ok.clicked.connect(self.accept)
         self.sep_line.textChanged.connect(self.update)
