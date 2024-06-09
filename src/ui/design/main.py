@@ -183,6 +183,7 @@ class MainDesign(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabs.sizePolicy().hasHeightForWidth())
         self.tabs.setSizePolicy(sizePolicy)
+        self.tabs.setMinimumSize(QtCore.QSize(200, 0))
         self.tabs.setMaximumSize(QtCore.QSize(200, 16777215))
         self.tabs.setObjectName("tabs")
         self.layers_tab = QtWidgets.QWidget()
