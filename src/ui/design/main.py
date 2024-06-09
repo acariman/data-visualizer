@@ -5,11 +5,11 @@ Generated with Designer from PyQt6-tools
 """
 
 # 3rd party
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 from vtkmodules.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 
 
-class Design(object):
+class MainDesign(object):
     def __init__(self):
         self.central = None
         self.gridLayout = None

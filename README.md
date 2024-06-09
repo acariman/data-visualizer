@@ -27,5 +27,5 @@ poetry install --with dev
 # Design environment
 Generates python file from Designer using PyQt6 module.
 ```
-poetry run pyuic6 src/ui/design.ui -o src/ui/_design.py
+poetry run pyuic6 src/ui/design/main.ui -o src/ui/design/_main.py
 ```

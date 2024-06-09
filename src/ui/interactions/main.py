@@ -5,13 +5,13 @@ import logging
 
 # 1st party
 from src.manipulation import Manipulator
-from src.ui.design import Design
+from src.ui.design.main import MainDesign
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import QDragEnterEvent, QDropEvent
 
 
-class Window(QMainWindow, Design):
+class MainWindow(QMainWindow, MainDesign):
     def __init__(self):
         logging.info("Initializing UI")
 
@@ -68,16 +68,3 @@ class Window(QMainWindow, Design):
         else:
             logging.debug(f"Hiding layer {layer}")
             self.mpl.hide(layer)
-
-
-def run():
-    logging.debug("Running UI")
-
-    app = QApplication([])
-    window = Window()
-    window.show()
-    app.exec()
-
-
-if __name__ == '__main__':
-    run()
