@@ -2,17 +2,33 @@
 
 """Top-level package for data visualizer"""
 
-# Core
-import logging
-
 __author__ = """Alex Carimán"""
 __email__ = "alex@cariman.cl"
 __version__ = "0.1.0"
 
 
-logging.basicConfig(
-    filename='visualizer.log',
-    level=logging.INFO,  # TODO: enable changing level from cli or settings
-    format='%(asctime)s %(levelname)s\t%(message)s',
-    datefmt='%Y-%m-%dT%H:%M:%S'
+# Logger
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+# For files
+file_handler = logging.FileHandler('visualizer.log')
+file_handler.setLevel(logging.INFO)
+
+# For cmd
+cmd_handler = logging.StreamHandler()
+cmd_handler.setLevel(logging.DEBUG)
+
+# Formats
+fmt = logging.Formatter(
+    fmt="%(asctime)s %(levelname)s\t%(message)s",
+    datefmt="%Y-%m-%dT%H:%M:%S",
 )
+file_handler.setFormatter(fmt)
+cmd_handler.setFormatter(fmt)
+
+# Adds handlers
+logger.addHandler(file_handler)
+logger.addHandler(cmd_handler)
