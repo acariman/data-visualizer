@@ -25,7 +25,7 @@ class Manipulator:
         if all([
             params["x"] in data,
             params["y"] in data,
-            params["z"] in data
+            params["z"] in data,
         ]):
             logging.debug(f"Adding layer based on params ({params})")
             self.layers[layer] = {
@@ -33,7 +33,7 @@ class Manipulator:
                     params["x"],
                     params["y"],
                     params["z"],
-                ]]),
+                ]], c=params["color"]),
                 "raw": data,
                 "state": True,
                 "nice-name": file.name,

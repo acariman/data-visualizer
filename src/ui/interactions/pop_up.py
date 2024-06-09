@@ -33,6 +33,6 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
 
         for i in range(self.layout.count()):
             widget = self.layout.itemAt(i).widget()
-            if isinstance(widget, QComboBox):
+            if isinstance(widget, QComboBox) and widget.objectName() not in ("color_cb",):
                 widget.clear()
                 widget.addItems(cols)

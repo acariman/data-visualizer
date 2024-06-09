@@ -51,10 +51,10 @@ class MainWindow(QMainWindow, MainDesign):
         if pop_up.exec() == QDialog.DialogCode.Accepted:
             params = {
                 "separator": pop_up.sep_line.text(),
-                "descriptor": pop_up.desc_cb.currentText(),
                 "x": pop_up.x_cb.currentText(),
                 "y": pop_up.y_cb.currentText(),
                 "z": pop_up.z_cb.currentText(),
+                "color": pop_up.color_cb.currentText(),
             }
 
         else:

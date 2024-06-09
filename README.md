@@ -12,7 +12,6 @@ poetry install
 
 # To do
 - Enable more file types.
-- Add pop-up for CSV files with different separators and columns.
 - Show information when hovering a point.
 - Generates a executable.
 
