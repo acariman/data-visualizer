@@ -4,7 +4,7 @@
 
 __author__ = """Alex Carimán"""
 __email__ = "alex@cariman.cl"
-__version__ = "1.1.1"
+__version__ = "1.2.0"
 
 
 # Logger
