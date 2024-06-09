@@ -47,7 +47,6 @@ class MainWindow(QMainWindow, MainDesign):
                 logging.error(f"No valid layer ({file})")
 
     def add_layer_csv(self, file):
-        params = None
         pop_up = CSVPopUp(file)
         if pop_up.exec() == QDialog.DialogCode.Accepted:
             params = {
@@ -57,6 +56,10 @@ class MainWindow(QMainWindow, MainDesign):
                 "y": pop_up.y_cb.currentText(),
                 "z": pop_up.z_cb.currentText(),
             }
+
+        else:
+            logging.warning(f"Pop up was closed")
+            return
 
         layer = self.mpl.add_csv(file=file, params=params)
 
