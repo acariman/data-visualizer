@@ -114,6 +114,6 @@ class MainWindow(QMainWindow, MainDesign):
             self.z_value.setText(" - ")
         else:
             self.layer_value.setText(info["layer"])
-            self.x_value.setText(str(round(info["x"], 1)))
-            self.y_value.setText(str(round(info["y"], 1)))
-            self.z_value.setText(str(round(info["z"], 1)))
+            self.x_value.setText("{:,.1f}".format(info["x"]))
+            self.y_value.setText("{:,.1f}".format(info["y"]))
+            self.z_value.setText("{:,.1f}".format(info["z"]))
