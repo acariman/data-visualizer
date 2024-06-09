@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """Top-level package for data visualizer"""
 
 __author__ = """Alex Carimán"""
