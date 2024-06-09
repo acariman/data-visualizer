@@ -25,7 +25,7 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
 
         self.separator = self.sep_line.text()
         self.file = file
-        self.layer_text.setText(str(file.name))
+        self.layer_text.setText(str(file.stem))
 
         self.ok.clicked.connect(self.accept)
         self.sep_line.textChanged.connect(self.update)
