@@ -22,18 +22,25 @@ class Manipulator:
 
         data = pd.read_csv(file)
 
-        if all([
-            params["x"] in data,
-            params["y"] in data,
-            params["z"] in data,
-        ]):
+        if all(
+            [
+                params["x"] in data,
+                params["y"] in data,
+                params["z"] in data,
+            ]
+        ):
             logging.debug(f"Adding layer based on params ({params})")
             self.layers[layer] = {
-                "actor": vedo.Points(data[[
-                    params["x"],
-                    params["y"],
-                    params["z"],
-                ]], c=params["color"]),
+                "actor": vedo.Points(
+                    data[
+                        [
+                            params["x"],
+                            params["y"],
+                            params["z"],
+                        ]
+                    ],
+                    c=params["color"],
+                ),
                 "raw": data,
                 "state": True,
                 "nice-name": file.name,
@@ -60,4 +67,4 @@ class Manipulator:
 
     def render(self):
         logging.info("Rendering new state")
-        self.canvas.show(resetcam=len(self.layers)<=1)
+        self.canvas.show(resetcam=len(self.layers) <= 1)

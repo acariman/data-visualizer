@@ -14,7 +14,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 # For files
-file_handler = logging.FileHandler('visualizer.log')
+file_handler = logging.FileHandler("visualizer.log")
 file_handler.setLevel(logging.INFO)
 
 # For cmd

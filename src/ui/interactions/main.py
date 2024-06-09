@@ -78,7 +78,9 @@ class MainWindow(QMainWindow, MainDesign):
         layer_name = QLabel(layer["nice-name"])
         checkbox = QCheckBox()
         checkbox.setChecked(layer["state"])
-        checkbox.stateChanged.connect(lambda state, lyr=layer["name"]: self.toggle_layer(state, lyr))
+        checkbox.stateChanged.connect(
+            lambda state, lyr=layer["name"]: self.toggle_layer(state, lyr)
+        )
 
         # Añadir los widgets al layout
         item_layout.addWidget(checkbox)

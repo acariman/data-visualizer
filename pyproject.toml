@@ -15,6 +15,7 @@ pandas = "^2.2.2"
 
 [tool.poetry.group.dev.dependencies]
 pyqt6-tools = "^6.4.2.3.3"
+ruff = "^0.4.8"
 
 
 [tool.poetry.group.test.dependencies]

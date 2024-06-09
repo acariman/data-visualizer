@@ -29,7 +29,9 @@ class MainDesign(object):
         self.gridLayout = QtWidgets.QGridLayout(self.central)
         self.gridLayout.setObjectName("gridLayout")
         self.tabs = QtWidgets.QTabWidget(parent=self.central)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabs.sizePolicy().hasHeightForWidth())
@@ -63,4 +65,6 @@ class MainDesign(object):
     def retranslateUi(self, main):
         _translate = QtCore.QCoreApplication.translate
         main.setWindowTitle(_translate("main", "Data visualizer"))
-        self.tabs.setTabText(self.tabs.indexOf(self.layers_tab), _translate("main", "Layers"))
+        self.tabs.setTabText(
+            self.tabs.indexOf(self.layers_tab), _translate("main", "Layers")
+        )

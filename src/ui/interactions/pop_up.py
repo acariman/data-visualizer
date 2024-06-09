@@ -34,7 +34,7 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
 
     def update(self):
         logging.debug("Updating pop up")
-        with open(self.file, 'r') as file:
+        with open(self.file, "r") as file:
             line = file.readline().strip()
 
         cols = line.split(self.separator)
