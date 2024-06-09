@@ -11,7 +11,7 @@ __version__ = "0.1.0"
 import logging
 
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 # For files
 file_handler = logging.FileHandler('visualizer.log')
