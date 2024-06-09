@@ -34,17 +34,9 @@ class Manipulator:
             ]
         ):
             logging.debug(f"Adding layer based on params ({params})")
+            data[["x", "y", "z"]] = data[[params["x"], params["y"], params["z"]]]
             self.layers[layer] = {
-                "actor": vedo.Points(
-                    data[
-                        [
-                            params["x"],
-                            params["y"],
-                            params["z"],
-                        ]
-                    ],
-                    c=params["color"],
-                ),
+                "actor": vedo.Points(data[["x", "y", "z"]], c=params["color"]),
                 "raw": data,
                 "state": True,
                 "nice-name": file.stem,
