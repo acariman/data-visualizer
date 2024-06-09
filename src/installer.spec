@@ -26,6 +26,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
+    datas=added_files,
     hiddenimports=[
         'vtkmodules',
         'vtkmodules.all',
@@ -33,7 +34,6 @@ a = Analysis(
         'vtkmodules.util.numpy_support',
         'vtkmodules.qt.QVTKRenderWindowInteractor',
     ],
-    datas=added_files,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -41,26 +41,29 @@ a = Analysis(
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,
-    noarchive=False
+    noarchive=False,
 )
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.zipfiles,
-    a.datas,
     [],
+    exclude_binaries=True,
     name='visualizer',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
     console=True,
-    disable_windowed_traceback=False,
-    target_arch=None,
-    codesign_identity=None,
-    entitlements_file=None
+)
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='visualizer'
 )
