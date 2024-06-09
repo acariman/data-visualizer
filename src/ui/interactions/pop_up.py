@@ -15,4 +15,23 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
         super().__init__()
         self.setup_ui(self)
 
+        self.separator = self.sep_line.text()
+        self.file = file
+
         self.ok.clicked.connect(self.accept)
+        self.sep_line.textChanged.connect(self.update)
+
+        self.update()
+
+    def update(self):
+        logging.debug("Updating pop up")
+        with open(self.file, 'r') as file:
+            line = file.readline().strip()
+
+        cols = line.split(self.separator)
+
+        for i in range(self.layout.count()):
+            widget = self.layout.itemAt(i).widget()
+            if isinstance(widget, QComboBox):
+                widget.clear()
+                widget.addItems(cols)
