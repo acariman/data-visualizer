@@ -31,6 +31,7 @@ class Manipulator:
                 params["x"] in data,
                 params["y"] in data,
                 params["z"] in data,
+                len(data.columns) > 1,
             ]
         ):
             logging.debug(f"Adding layer based on params ({params})")
