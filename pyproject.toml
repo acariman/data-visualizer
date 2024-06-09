@@ -7,7 +7,7 @@ license = "MIT license"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.13"
 pyqt6 = "6.4.2"
 vedo = "^2024.5.1"
 pandas = "^2.2.2"
@@ -16,6 +16,10 @@ pandas = "^2.2.2"
 [tool.poetry.group.dev.dependencies]
 pyqt6-tools = "^6.4.2.3.3"
 ruff = "^0.4.8"
+
+
+[tool.poetry.group.exec.dependencies]
+pyinstaller = "^6.8.0"
 
 
 [tool.poetry.group.test.dependencies]
