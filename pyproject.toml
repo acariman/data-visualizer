@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "data-visualizer"
+version = "0.1.0"
+description = "Simple 3D data visualizer"
+authors = ["Alex Carimán"]
+license = "MIT license"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyqt6 = "6.4.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pyqt6-tools = "^6.4.2.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry_bumpversion.file."src/__init__.py"]
+search = '__version__ = "{current_version}"'
+replace = '__version__ = "{new_version}"'
