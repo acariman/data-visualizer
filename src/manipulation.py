@@ -60,4 +60,4 @@ class Manipulator:
 
     def render(self):
         logging.info("Rendering new state")
-        self.canvas.show()
+        self.canvas.show(resetcam=len(self.layers)<=1)
