@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 
 # Core
+import re
 import logging
 
 # 1st party
 from src.ui.design.pop_up import CSVPopUpDesign
 from PyQt6.QtWidgets import *
+
+
+patterns = {
+    "x_cb": re.compile(r"\b(\w*[_\s-]?x|x[_\s-]?\w*)\b", re.IGNORECASE),
+    "y_cb": re.compile(r"\b(\w*[_\s-]?y|y[_\s-]?\w*)\b", re.IGNORECASE),
+    "z_cb": re.compile(r"\b(\w*[_\s-]?z|z[_\s-]?\w*)\b", re.IGNORECASE),
+}
 
 
 class CSVPopUp(QDialog, CSVPopUpDesign):
@@ -31,8 +39,19 @@ class CSVPopUp(QDialog, CSVPopUpDesign):
 
         cols = line.split(self.separator)
 
+        suggestions = {}
+        for col in cols:
+            for axis, pattern in patterns.items():
+                if pattern.search(col):
+                    suggestions[axis] = col
+        logging.debug(f"Suggesting following columns: {suggestions}")
+
         for i in range(self.layout.count()):
             widget = self.layout.itemAt(i).widget()
-            if isinstance(widget, QComboBox) and widget.objectName() not in ("color_cb",):
+            name = widget.objectName()
+            if isinstance(widget, QComboBox) and name not in ("color_cb",):
                 widget.clear()
                 widget.addItems(cols)
+
+                if name in suggestions:
+                    widget.setCurrentText(suggestions[name])
