@@ -9,9 +9,10 @@ import pandas as pd
 
 
 class Manipulator:
-    def __init__(self, widget=None):
+    def __init__(self, widget=None, render=True):
         self.layers = {}
         self.canvas = vedo.Plotter(qt_widget=widget)
+        self.render = render
 
     def add(self, file):
         file = Path(file)
@@ -24,6 +25,9 @@ class Manipulator:
             }
 
         self.canvas += self.layers[file.stem]["actor"]
+
+        if self.render:
+            self.show()
 
     def show(self):
         self.canvas.show()

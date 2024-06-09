@@ -8,5 +8,5 @@ from src.manipulation import Manipulator
 
 
 def test_initialization():
-    m = Manipulator()
+    m = Manipulator(render=False)
     m.add("tests/sample.csv")
