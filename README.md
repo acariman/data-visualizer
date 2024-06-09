@@ -12,7 +12,6 @@ poetry install
 
 # To do
 - Enable more file types.
-- Show information when hovering a point.
 - Generates a executable.
 
 
