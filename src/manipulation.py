@@ -9,11 +9,14 @@ import pandas as pd
 
 
 class Manipulator:
-    def __init__(self, widget=None, render=True):
+    def __init__(self, widget=None, render=True, parallel_proj=True):
         logging.info("Initializing Manipulator")
 
         self.layers = {}
         self.canvas = vedo.Plotter(qt_widget=widget)
+        self.cam = self.canvas.camera
+        self.cam.SetParallelProjection(parallel_proj)
+
         self.should_render = render
 
     def add_csv(self, file, params=None):
